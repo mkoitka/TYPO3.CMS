@@ -30,7 +30,7 @@ class FileOrFolderLinkBuilder extends AbstractTypolinkBuilder
     {
         $fileOrFolderObject = $linkDetails['file'] ? $linkDetails['file'] : $linkDetails['folder'];
         // check if the file exists or if a / is contained (same check as in detectLinkType)
-        if (!($fileOrFolderObject instanceof FileInterface) && !($fileOrFolderObject instanceof Folder)) {
+        if ($fileOrFolderObject->isMissing() || (!($fileOrFolderObject instanceof FileInterface) && !($fileOrFolderObject instanceof Folder))) {
             throw new UnableToLinkException(
                 'File "' . $linkDetails['typoLinkParameter'] . '" did not exist, so "' . $linkText . '" was not linked.',
                 1490989449,
